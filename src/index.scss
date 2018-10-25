@@ -1,5 +1,123 @@
-$main-color: skyblue;
+@charset "utf-8";
+@import url(css/normalize.css);
+@import url(css/reset.css);
 
-body {
-  background-color: $main-color;
+// 전체 그룹화
+.container {
+  height: 100vh;
+  background-color: #160133;
+  color: white;
+
+
+}
+
+
+// 메인
+.main {
+    width: 550px;
+    margin: 0 auto;
+}
+
+// 바둑판
+.board {
+
+  width: 500px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+}
+.col {
+  position: relative;
+  flex-grow: 1;
+  cursor: pointer;
+}
+.col:hover {
+  background-color: #4b6043;
+}
+
+.col::before {
+  display: block;
+  content: "";
+  padding-bottom: 98%;
+}
+
+.col-grid::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  bottom: -2px;
+  left: 50%;
+  border-top: 2px solid #aaa;
+  border-left: 2px solid #aaa;
+  box-sizing: border-box;
+}
+
+.col-grid::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: calc(50% - 2px);
+  bottom: calc(50% - 2px);
+  left: 0;
+  border-right: 2px solid #aaa;
+  border-bottom: 2px solid #aaa;
+  box-sizing: border-box;
+}
+
+// 바둑판 - 테두리 선 없애기
+.row:first-child .col-grid::after {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.row:last-child .col-grid::before {
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.col:first-child .col-grid::after {
+  border-top: none;
+  border-left: none;
+  border-bottom: none;
+}
+
+.col:last-child .col-grid::before {
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+}
+
+// 바둑알
+.col::after {
+  position: absolute;
+  display: block;
+  content: "";
+  padding-bottom: 80%;
+  width: 80%;
+  top: 10%;
+  left: 10%;
+  border-radius: 50%;
+}
+
+// 흑돌
+.col.black::after {
+  background-color: #aaa;
+}
+
+// 백돌
+.col.white::after{
+  background-color: white;
+}
+
+.board-container {
+  width: 550px;
+  border-top: 3px solid white;
+  border-bottom: 3px solid white;
 }
