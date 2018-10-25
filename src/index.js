@@ -253,7 +253,7 @@ document.querySelector(".reset").addEventListener("click", e => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
-  black = false;
+  currentStone = 1
   drawBoard();
 });
 

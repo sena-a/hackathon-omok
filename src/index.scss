@@ -1,28 +1,65 @@
 @charset "utf-8";
 @import url(css/normalize.css);
 @import url(css/reset.css);
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,500,500i,700');
 
 // 전체 그룹화
+
+body {
+  font-size: 10px;
+  font-family: ‘Roboto Mono’, monospace;
+
+}
+
+a {
+  text-decoration: none;
+  color: #7afa4f;
+}
+
+
 .container {
   height: 100vh;
   background-color: #160133;
   color: white;
 
-
 }
 
+.container h1 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #7afa4f;
+}
 
 // 메인
 .main {
     width: 550px;
-    margin: 0 auto;
+    margin: 100px auto 0;
+}
+
+.players {
+
+  display: flex;
+  font-size: 1.4rem;
+  padding-bottom: 3px;
+  justify-content: space-between;
+
+}
+
+
+.player1-stone {
+  color: #00af43;
+}
+
+.player2-stone {
+  color: #3054f1;
 }
 
 // 바둑판
 .board {
 
   width: 500px;
-  margin: 0 auto;
+  margin: 30px auto 0;
+
 }
 
 .row {
@@ -103,22 +140,55 @@
   width: 80%;
   top: 10%;
   left: 10%;
+
   border-radius: 50%;
 }
 
 // 흑돌
 .col.black::after {
-  background-color: #aaa;
+  background-color: #00af43;
+  // border: 1px solid #fff;
 }
 
 // 백돌
 .col.white::after{
-  background-color: white;
+  background-color: #3054f1;
 }
 
 .board-container {
   width: 550px;
   border-top: 3px solid white;
   border-bottom: 3px solid white;
+}
+
+
+// 경기결과 창
+.result {
+  display: none;
+}
+
+
+// 다시하기 버튼
+
+.reset-container {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 8px 0 7px 0;
+}
+.reset {
+  font-size: 0.8rem;
+  line-height: 1;
+
+}
+
+
+.footer {
+  width: 550px;
+  margin: 7px auto;
+}
+
+.github-info {
+  font-size: 0.8rem;
+  color: #7afa4f;
 }
 
