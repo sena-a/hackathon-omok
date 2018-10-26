@@ -1,23 +1,28 @@
 // 스타트 버튼 클릭
 
 const startPage = document.querySelector('.start-page')
+const startPlayersEl = document.querySelector('.start-players')
+const player1El = document.querySelector('.player1-name')
+const player2El = document.querySelector('.player2-name')
 
 document.querySelector('.start-btn').addEventListener('click', e=> {
   startPage.classList.add('start-act')
+  player1(startPlayersEl.player1.value)
+  player2(startPlayersEl.player2.value)
 })
 
-// 플레이어 이름 값 가져오기
+// 플레이어 이름 값 함수
 
-// 기본값 함수
-
-function player1(name = "player1"){
-  return name;
+function player1(name){
+  if(name === ''){player1El.textContent = 'Player1';}else{
+    player1El.textContent = name;
+  }
 }
-
-function player2(name = "player2"){
-  return name;
+function player2(name){
+   if(name === ''){player2El.textContent = 'Player2';}else{
+    player2El.textContent = name;
+  }
 }
-
 
 // 게임 로직
 // 현재 놓여진 돌이
