@@ -1,8 +1,8 @@
 # FDS 해커톤 템플릿 프로젝트
 
-# Game Rules
+오목(omok)
 
-오목
+# Game Rules
 
 - 초록돌 : player1 , 파란돌 : player2
 - 사용자가 번갈아 가면서 돌을 둔다.
@@ -19,6 +19,6 @@
 
 # Team Member
 
-- 김현준[@joonkim0625]("https://github.com/joonkim0625")
-- 조민지[@minji2687]("https://github.com/minji2687")
-- 안세나[@serendipity]("https://github.com/sena-a")
+- 김현준 [@joonkim0625](https://github.com/joonkim0625)
+- 조민지 [@minji2687](https://github.com/minji2687)
+- 안세나 [@serendipity](https://github.com/sena-a)
