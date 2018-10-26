@@ -4,17 +4,20 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,500,500i,700");
 
 // 전체 그룹화
+
 body {
   font-size: 10px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: ‘Roboto Mono’, monospace;
   height: 100vh;
   background-color: #160133;
   color: white;
 }
+
 a {
   text-decoration: none;
   color: #7afa4f;
 }
+
 button{
   margin:0;
   padding:0;
@@ -23,57 +26,72 @@ button{
 }
 
 // 메인 게임 페이지
+
 .container h1 {
   margin: 0;
   font-size: 0.9rem;
   color: #7afa4f;
 }
+
 .main {
   width: 550px;
   margin: 100px auto 0;
 }
+
 // 사용자 이름 표시 관련
+
 .players {
   display: flex;
   font-size: 1.4rem;
   padding-bottom: 3px;
   justify-content: space-between;
 }
+
 .player1-stone {
   color: #00af43;
 }
+
 .player2-stone {
   color: #3054f1;
 }
+
 .current-turn {
   color: rgb(255, 196, 252);
 }
+
 // 바둑판
+
 .board-container {
   width: 550px;
   border-top: 3px solid white;
   border-bottom: 3px solid white;
 }
+
 .board {
   width: 500px;
   margin: 30px auto 0;
 }
+
 .row {
   display: flex;
 }
+
 .col {
   position: relative;
   flex-grow: 1;
   cursor: pointer;
 }
+
 .col:hover {
   background-color: #4b6043;
 }
+
 .col::before {
   display: block;
   content: "";
   padding-bottom: 98%;
 }
+
 .col-grid::before {
   display: block;
   content: "";
@@ -86,6 +104,7 @@ button{
   border-left: 2px solid #aaa;
   box-sizing: border-box;
 }
+
 .col-grid::after {
   display: block;
   content: "";
@@ -98,27 +117,32 @@ button{
   border-bottom: 2px solid #aaa;
   box-sizing: border-box;
 }
+
 // 바둑판 - 테두리 선 없애기
 .row:first-child .col-grid::after {
   border-top: none;
   border-left: none;
   border-right: none;
 }
+
 .row:last-child .col-grid::before {
   border-bottom: none;
   border-left: none;
   border-right: none;
 }
+
 .col:first-child .col-grid::after {
   border-top: none;
   border-left: none;
   border-bottom: none;
 }
+
 .col:last-child .col-grid::before {
   border-top: none;
   border-bottom: none;
   border-right: none;
 }
+
 // 바둑알
 .col::after {
   position: absolute;
@@ -130,15 +154,19 @@ button{
   left: 10%;
   border-radius: 50%;
 }
+
 // 흑돌
 .col.black::after {
   background-color: #00af43;
 }
+
 // 백돌
 .col.white::after {
   background-color: #3054f1;
 }
+
 // 리셋 버튼
+
 .reset-container {
   display: flex;
   flex-direction: row-reverse;
@@ -148,21 +176,25 @@ button{
   background:linear-gradient( #eee, #ddd);
   font-size: 0.8rem;
   line-height: 1;
-   padding: 5px 10px;
-   border-radius: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
+
 // 푸터
 .footer {
-  height:10vh;
   width: 550px;
   margin: 7px auto 0;
+  height: 10vh;
 }
+
 .github-info {
   font-size: 0.8rem;
   color: #7afa4f;
 }
 
+
 // 게임 시작 페이지
+
 .start-page {
   background-color: rgba(000, 000, 000, 0.6);
   width: 100%;
@@ -171,12 +203,14 @@ button{
   top: 0;
   left: 0;
 }
+
 .game-title {
   text-align: center;
   margin: 33vh 0 0 0;
   font-size: 1.4rem;
   color: #7afa4f;
 }
+
 .start-main {
   border: 2px solid #fff;
   width: 600px;
@@ -190,7 +224,9 @@ button{
   font-size: 1.1rem;
   transform: translateY(-50%);
 }
+
 // 사용자 이름 입력 창
+
 .start-players input {
   background-color: black;
   color: white;
@@ -201,13 +237,17 @@ button{
   padding-bottom: 10px;
   outline: 0;
 }
+
 .start-players input::placeholder {
   color: white;
 }
+
 .start-players input:focus {
   border-color: #7afa4f;
 }
+
 // 시작하기 버튼
+
 .start-btn {
   background:linear-gradient( #eee, #ddd);
   font-size: 0.8rem;
@@ -217,12 +257,16 @@ button{
   padding: 5px 10px;
   border-radius: 5px;
 }
+
 // 게임 시작 버튼 클릭 시 시작 페이지 사라짐
+
 .start-act {
   display: none;
 }
 
+
 // 게임 종료시 화면
+
 .winner-page {
   background-color: rgba(000, 000, 000, 0.6);
   width: 100%;
@@ -232,6 +276,7 @@ button{
   left: 0;
   display: none;
 }
+
 .winner-main {
   border: 2px solid #fff;
   width: 600px;
@@ -245,13 +290,15 @@ button{
   font-size: 1.1rem;
   transform: translateY(-50%);
 }
+
 // 승리 문구
 .winner-text {
   line-height: 1.7;
 }
+
 // 재시작 버튼
 .restart-btn {
-background:linear-gradient( #eee, #ddd);
+  background:linear-gradient( #eee, #ddd);
   font-size: 0.8rem;
   font-weight: 700;
   line-height: 1;
@@ -259,24 +306,31 @@ background:linear-gradient( #eee, #ddd);
   padding: 5px 10px;
   border-radius: 5px;
 }
+
 // 재시작 버튼 클릭 시 승리 화면 지우기
+
 // 흑돌이 이겼을 때
 .winner1-act {
   display: block;
 }
+
 .winner1-act .winner-main {
   border-color: #00af43;
 }
+
 .winner1-act .winner-text {
   color: #00ff62;
 }
+
 // 백돌이 이겼을 때
 .winner2-act {
   display: block;
 }
+
 .winner2-act .winner-main {
   border-color: #3054f1;
 }
+
 .winner2-act .winner-text {
   color: #68cfff;
 }
