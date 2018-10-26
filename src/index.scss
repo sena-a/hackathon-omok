@@ -1,7 +1,7 @@
 @charset "utf-8";
 @import url(css/normalize.css);
 @import url(css/reset.css);
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,500,500i,700');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,500,500i,700");
 
 // 전체 그룹화
 
@@ -19,17 +19,20 @@ a {
 }
 
 
+// 메인 게임 페이지
+
 .container h1 {
   margin: 0;
   font-size: 0.9rem;
   color: #7afa4f;
 }
 
-// 메인
 .main {
-    width: 550px;
-    margin: 100px auto 0;
+  width: 550px;
+  margin: 100px auto 0;
 }
+
+// 사용자 이름 표시 관련
 
 .players {
   display: flex;
@@ -37,7 +40,6 @@ a {
   padding-bottom: 3px;
   justify-content: space-between;
 }
-
 
 .player1-stone {
   color: #00af43;
@@ -47,22 +49,33 @@ a {
   color: #3054f1;
 }
 
-// 바둑판
-.board {
+.current-turn {
+  color: rgb(255, 196, 252);
+}
 
+// 바둑판
+
+.board-container {
+  width: 550px;
+  border-top: 3px solid white;
+  border-bottom: 3px solid white;
+}
+
+.board {
   width: 500px;
   margin: 30px auto 0;
-
 }
 
 .row {
   display: flex;
 }
+
 .col {
   position: relative;
   flex-grow: 1;
   cursor: pointer;
 }
+
 .col:hover {
   background-color: #4b6043;
 }
@@ -133,35 +146,20 @@ a {
   width: 80%;
   top: 10%;
   left: 10%;
-
   border-radius: 50%;
 }
 
 // 흑돌
 .col.black::after {
   background-color: #00af43;
-  // border: 1px solid #fff;
 }
 
 // 백돌
-.col.white::after{
+.col.white::after {
   background-color: #3054f1;
 }
 
-.board-container {
-  width: 550px;
-  border-top: 3px solid white;
-  border-bottom: 3px solid white;
-}
-
-
-// 경기결과 창
-.result {
-  display: none;
-}
-
-
-// 다시하기 버튼
+// 리셋 버튼
 
 .reset-container {
   display: flex;
@@ -173,7 +171,7 @@ a {
   line-height: 1;
 }
 
-
+// 푸터
 .footer {
   width: 550px;
   margin: 7px auto 0;
@@ -185,20 +183,28 @@ a {
   color: #7afa4f;
 }
 
+
 // 게임 시작 페이지
 
-.start-page{
-  background-color: rgba(000,000,000,0.6);
+.start-page {
+  background-color: rgba(000, 000, 000, 0.6);
   width: 100%;
   height: 100%;
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
 }
 
-.start-main{
+.game-title {
+  text-align: center;
+  margin: 33vh 0 0 0;
+  font-size: 1.4rem;
+  color: #7afa4f;
+}
+
+.start-main {
   border: 2px solid #fff;
-  width:600px;
+  width: 600px;
   background-color: black;
   position: absolute;
   top: 50%;
@@ -207,17 +213,12 @@ a {
   text-align: center;
   padding: 20px 0;
   font-size: 1.1rem;
-  transform:translateY(-50%);
+  transform: translateY(-50%);
 }
 
-.game-title{
-  text-align: center;
-  margin: 33vh 0 0 0;
-  font-size: 1.4rem;
-  color: #7afa4f;
-}
+// 사용자 이름 입력 창
 
-.start-players input{
+.start-players input {
   background-color: black;
   color: white;
   border: 0;
@@ -228,16 +229,17 @@ a {
   outline: 0;
 }
 
-.start-players input::placeholder{
+.start-players input::placeholder {
   color: white;
 }
 
-.start-players input:focus{
-  // border: 1px solid #7afa4f
+.start-players input:focus {
   border-color: #7afa4f;
 }
 
-.start-btn{
+// 시작하기 버튼
+
+.start-btn {
   font-size: 0.8rem;
   font-weight: 700;
   line-height: 1;
@@ -248,26 +250,26 @@ a {
 
 // 게임 시작 버튼 클릭 시 시작 페이지 사라짐
 
-.start-act{
+.start-act {
   display: none;
 }
 
 
-// 승리 화면
+// 게임 종료시 화면
 
-.winner-page{
-  background-color: rgba(000,000,000,0.6);
+.winner-page {
+  background-color: rgba(000, 000, 000, 0.6);
   width: 100%;
   height: 100%;
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   display: none;
 }
 
-.winner-main{
+.winner-main {
   border: 2px solid #fff;
-  width:600px;
+  width: 600px;
   background-color: black;
   position: absolute;
   top: 50%;
@@ -276,14 +278,16 @@ a {
   text-align: center;
   padding: 20px 0;
   font-size: 1.1rem;
-  transform:translateY(-50%);
+  transform: translateY(-50%);
 }
 
-.winner-text{
+// 승리 문구
+.winner-text {
   line-height: 1.7;
 }
 
-.restart-btn{
+// 재시작 버튼
+.restart-btn {
   font-size: 0.8rem;
   font-weight: 700;
   line-height: 1;
@@ -292,28 +296,30 @@ a {
   border-radius: 5px;
 }
 
-// 리스타트 버튼 클릭 시 승리 화면 지우기
+// 재시작 버튼 클릭 시 승리 화면 지우기
 
-.winner1-act{
+// 흑돌이 이겼을 때
+.winner1-act {
   display: block;
 }
 
-.winner1-act .winner-main{
+.winner1-act .winner-main {
   border-color: #00af43;
 }
 
-.winner1-act .winner-text{
+.winner1-act .winner-text {
   color: #00ff62;
 }
 
-.winner2-act{
+// 백돌이 이겼을 때
+.winner2-act {
   display: block;
 }
 
-.winner2-act .winner-main{
-  border-color:  #3054f1;
+.winner2-act .winner-main {
+  border-color: #3054f1;
 }
 
-.winner2-act .winner-text{
+.winner2-act .winner-text {
   color: #68cfff;
 }

@@ -1,5 +1,4 @@
-// 스타트 버튼 클릭
-
+// 공통 변수
 const startPage = document.querySelector('.start-page')
 
 const winnerPage = document.querySelector('.winner-page')
@@ -7,16 +6,11 @@ const winnerPage = document.querySelector('.winner-page')
 const startPlayersEl = document.querySelector('.start-players')
 
 const player1El = document.querySelector('.player1-name')
+
 const player2El = document.querySelector('.player2-name')
 
-document.querySelector('.start-btn').addEventListener('click', e=> {
-  startPage.classList.add('start-act')
-  player1El.textContent = player1(startPlayersEl.player1.value)
-  player2El.textContent = player2(startPlayersEl.player2.value)
-})
 
-// 플레이어 이름 값 함수
-
+// 사용자 이름 입력 값 함수
 function player1(name){
   if(name === ''){return 'Player1';}else{
     return name;
@@ -30,12 +24,12 @@ function player2(name){
 }
 
 // 게임 로직
-// 현재 놓여진 돌이
+
+// 현재 바둑돌 색깔 - 흑돌일 시 1, 백돌일 시 2
+
 let currentStone = 1
 
-let playerTurn = false
-
-// 게임판의 상태를 만들기
+// 게임판 초기값
 let boardState = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -54,15 +48,10 @@ let boardState = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
-// -------
-// 상태로부터 화면을 그리는 역할과 책임을 가지고 있는 함수! 화면을 그리는 것은 다 여기다!
+// 게임 상태
 function drawBoard() {
-  // 게임판에 1이 적혀있으면 그것은 X표시!
-  // 일단, board안에 있는 모든 row들을 선택해보자
   document.querySelectorAll(".row").forEach((rowEl, rowIndex) => {
-    // 이렇게 사용하면 rowEl의 자식 요소들에서 찾는다.
     rowEl.querySelectorAll(".col").forEach((colEl, colIndex) => {
-      // 중첩루프나 마찬가지인 것으로, 보드스테이트의 요소들을 지정
       if (boardState[rowIndex][colIndex] === 1) {
         colEl.classList.add("black");
       } else {
@@ -76,59 +65,55 @@ function drawBoard() {
     });
   });
 
+// 승리 시 화면 변화
   if (omok(boardState) === 1) {
-    // winner 닉넴 span태그에 텍스트컨텐츠추가
     document.querySelector('.winner').textContent = player1(startPlayersEl.player1.value)
-    // winner-act 추가
     document.querySelector('.winner-page').classList.add('winner1-act')
   } else if(omok(boardState) === 2) {
     document.querySelector('.winner').textContent = player2(startPlayersEl.player2.value)
     document.querySelector('.winner-page').classList.add('winner2-act')
   }
 }
-// ----------
 
 
-// 체크 로직
+// 승리 체크 로직
+
 function omok(arr) {
-  // 가로줄 확인 - 0일 때도 기록하고 확인하는 것으로 처리(코드가 짧아짐)
+
+  // 가로줄
   for (let i = 0; i < 15; i++) {
     let currentPlayer;
     let count;
     for (let j = 0; j < 15; j++) {
-      // 새로운 플레이어를 발견했을 때
-      // currentPlayer = 지금 내가 보고 있는 위치 혹은 돌
       if (currentPlayer !== arr[i][j]) {
         currentPlayer = arr[i][j];
         count = 1;
       } else {
         count++;
       }
-      // 만약 1이나 2가 5번 연속되어 있으면 그 값(currentPlayer)을 반환
       if ((currentPlayer === 1 || currentPlayer === 2) && count === 5) {
         return currentPlayer;
       }
     }
   }
-  // 세로줄 확인!
+
+  // 세로줄
   for (let i = 0; i < 15; i++) {
     let currentPlayer;
     let count;
     for (let j = 0; j < 15; j++) {
-      // 새로운 플레이어를 발견했을 때
-      // currentPlayer = 지금 내가 보고 있는 위치 혹은 돌
       if (currentPlayer !== arr[j][i]) {
         currentPlayer = arr[j][i];
         count = 1;
       } else {
         count++;
       }
-      // 만약 1이나 2가 5번 연속되어 있으면 그 값(currentPlayer)을 반환
       if ((currentPlayer === 1 || currentPlayer === 2) && count === 5) {
         return currentPlayer;
       }
     }
   }
+
   // 대각선 왼쪽 : 중앙을 가로지르는 줄
   {
     let currentPlayer;
@@ -236,35 +221,41 @@ function omok(arr) {
   return 0;
 }
 
-// 돌 놓는 이벤트 발생
+// 게임 진행 로직
 document.querySelectorAll(".row").forEach((rowEl, rowIndex) => {
   rowEl.querySelectorAll(".col").forEach((colEl, colIndex) => {
     colEl.addEventListener("click", e => {
-      // 중복이면 클릭되면 안된다.
-
-      // ---
-
         if (!omok(boardState)) {
-          if (boardState[rowIndex][colIndex] !== 0) {
-            alert("돌 위에 두면 안됨");
-          } else {
+          // 놓여진 돌이 없을 때만 실행
+          if (boardState[rowIndex][colIndex] === 0){
             boardState[rowIndex][colIndex] = currentStone;
             currentStone = boardState[rowIndex][colIndex] === 1 ? 2 : 1;
           }
+
+          // 현재 턴 표시
+          if (currentStone === 1){
+            player1El.classList.add('current-turn')
+            player2El.classList.remove('current-turn')
+          } else if (currentStone === 2){
+            player2El.classList.add('current-turn')
+            player1El.classList.remove('current-turn')
+          }
+
           drawBoard();
         }
-
-
-      // ---
-
     });
   });
 });
-// ------
 
+// 시작하기 버튼 이벤트 리스너
+document.querySelector('.start-btn').addEventListener('click', e=> {
+  startPage.classList.add('start-act')
+  player1El.classList.add('current-turn')
+  player1El.textContent = player1(startPlayersEl.player1.value)
+  player2El.textContent = player2(startPlayersEl.player2.value)
+})
 
-// -------
-// 승자 창의 다시 시작 버튼
+// 게임 종료 시 재시작 버튼 이벤트리스너
 document.querySelector('.restart-btn').addEventListener('click', e=> {
 
   boardState = [
@@ -296,10 +287,11 @@ document.querySelector('.restart-btn').addEventListener('click', e=> {
   startPage.classList.remove('start-act');
 })
 
-// 다시 시작 버튼 - 이벤트리스너는 바깥에 생성해주자!
+
+// 리셋 버튼 이벤트리스너
+
 document.querySelector(".reset-btn").addEventListener("click", e => {
-  // 상태를 초기화 한 다음에 다시 그려준다!
-  // alert("!!!!");
+
   boardState = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -323,5 +315,5 @@ document.querySelector(".reset-btn").addEventListener("click", e => {
   startPage.classList.add('start-act');
 });
 
-// 함수를 호출했을 때!! boardState의 상태에서 그려지게!
+// 기본 화면
 drawBoard();
