@@ -1,26 +1,31 @@
 // 스타트 버튼 클릭
 
 const startPage = document.querySelector('.start-page')
+
+const winnerPage = document.querySelector('.winner-page')
+
 const startPlayersEl = document.querySelector('.start-players')
+
 const player1El = document.querySelector('.player1-name')
 const player2El = document.querySelector('.player2-name')
 
 document.querySelector('.start-btn').addEventListener('click', e=> {
   startPage.classList.add('start-act')
-  player1(startPlayersEl.player1.value)
-  player2(startPlayersEl.player2.value)
+  player1El.textContent = player1(startPlayersEl.player1.value)
+  player2El.textContent = player2(startPlayersEl.player2.value)
 })
 
 // 플레이어 이름 값 함수
 
 function player1(name){
-  if(name === ''){player1El.textContent = 'Player1';}else{
-    player1El.textContent = name;
+  if(name === ''){return 'Player1';}else{
+    return name;
   }
 }
+
 function player2(name){
-   if(name === ''){player2El.textContent = 'Player2';}else{
-    player2El.textContent = name;
+  if(name === ''){return 'Player2';}else{
+    return name;
   }
 }
 
@@ -71,19 +76,21 @@ function drawBoard() {
     });
   });
 
-  if (gomoku(boardState) === 0) {
-    document.querySelector(".result").textContent = "경기중";
-  } else if (gomoku(boardState) === 1) {
-    document.querySelector(".result").textContent = "p1!";
-  } else {
-    document.querySelector(".result").textContent = "p2!";
+  if (omok(boardState) === 1) {
+    // winner 닉넴 span태그에 텍스트컨텐츠추가
+    document.querySelector('.winner').textContent = player1(startPlayersEl.player1.value)
+    // winner-act 추가
+    document.querySelector('.winner-page').classList.add('winner1-act')
+  } else if(omok(boardState) === 2) {
+    document.querySelector('.winner').textContent = player2(startPlayersEl.player2.value)
+    document.querySelector('.winner-page').classList.add('winner2-act')
   }
 }
 // ----------
 
 
 // 체크 로직
-function gomoku(arr) {
+function omok(arr) {
   // 가로줄 확인 - 0일 때도 기록하고 확인하는 것으로 처리(코드가 짧아짐)
   for (let i = 0; i < 15; i++) {
     let currentPlayer;
@@ -237,15 +244,13 @@ document.querySelectorAll(".row").forEach((rowEl, rowIndex) => {
 
       // ---
 
-        if (!gomoku(boardState)) {
+        if (!omok(boardState)) {
           if (boardState[rowIndex][colIndex] !== 0) {
-
             alert("돌 위에 두면 안됨");
           } else {
             boardState[rowIndex][colIndex] = currentStone;
+            currentStone = boardState[rowIndex][colIndex] === 1 ? 2 : 1;
           }
-          currentStone = boardState[rowIndex][colIndex] === 1 ? 2 : 1;
-
           drawBoard();
         }
 
@@ -259,8 +264,40 @@ document.querySelectorAll(".row").forEach((rowEl, rowIndex) => {
 
 
 // -------
+// 승자 창의 다시 시작 버튼
+document.querySelector('.restart-btn').addEventListener('click', e=> {
+
+  boardState = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
+  currentStone = 1;
+  drawBoard();
+
+  winnerPage.classList.remove('winner1-act')
+  winnerPage.classList.remove('winner2-act')
+
+  startPlayersEl.player1.value = ''
+  startPlayersEl.player2.value = ''
+
+  startPage.classList.remove('start-act');
+})
+
 // 다시 시작 버튼 - 이벤트리스너는 바깥에 생성해주자!
-document.querySelector(".reset").addEventListener("click", e => {
+document.querySelector(".reset-btn").addEventListener("click", e => {
   // 상태를 초기화 한 다음에 다시 그려준다!
   // alert("!!!!");
   boardState = [
@@ -283,7 +320,7 @@ document.querySelector(".reset").addEventListener("click", e => {
   currentStone = 1;
   drawBoard();
 
-  startPage.classList.remove('start-act');
+  startPage.classList.add('start-act');
 });
 
 // 함수를 호출했을 때!! boardState의 상태에서 그려지게!

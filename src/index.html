@@ -751,7 +751,7 @@
 
         <div class="result"></div>
         <div class="reset-container">
-          <button class="reset">restart</button>
+          <button class="reset-btn">reset</button>
         </div>
       </main>
     </div>
@@ -770,20 +770,36 @@
 
   <div class="start-page">
 
-    <h2 class="game-title">오목게임</h2>
+    <h2 class="game-title">[OMOK] : Programmed By Team Guobaorou</h2>
 
     <section class="start-main">
 
       <form class="start-players">
-          <input type="text" name="player1" placeholder="Player1" maxlength="10">
+          <input type="text" name="player1" placeholder="Player1" maxlength="10" autocomplete="off">
 
           <span>vs</span>
 
-          <input type="text" name="player2" placeholder="Player2" maxlength="10">
+          <input type="text" name="player2" placeholder="Player2" maxlength="10" autocomplete="off">
         </form>
 
         <button class="start-btn">
           start
+        </button>
+    </section>
+  </div>
+
+  <div class="winner-page">
+
+    <section class="winner-main">
+
+      <div class="winner-text">
+        winner ->
+        <span class="winner"></span>
+        <p>press restart button</p>
+      </div>
+
+        <button class="restart-btn">
+          restart
         </button>
     </section>
   </div>
