@@ -312,6 +312,9 @@ document.querySelector(".reset-btn").addEventListener("click", e => {
   currentStone = 1;
   drawBoard();
 
+  player1El.classList.add('current-turn')
+  player2El.classList.remove('current-turn')
+
   startPage.classList.add('start-act');
 });
 
