@@ -1,3 +1,25 @@
+// 스타트 버튼 클릭
+
+const startPage = document.querySelector('.start-page')
+
+document.querySelector('.start-btn').addEventListener('click', e=> {
+  startPage.classList.add('start-act')
+})
+
+// 플레이어 이름 값 가져오기
+
+// 기본값 함수
+
+function player1(name = "player1"){
+  return name;
+}
+
+function player2(name = "player2"){
+  return name;
+}
+
+
+// 게임 로직
 // 현재 놓여진 돌이
 let currentStone = 1
 
@@ -253,8 +275,10 @@ document.querySelector(".reset").addEventListener("click", e => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
-  currentStone = 1
+  currentStone = 1;
   drawBoard();
+
+  startPage.classList.remove('start-act');
 });
 
 // 함수를 호출했을 때!! boardState의 상태에서 그려지게!
