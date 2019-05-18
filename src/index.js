@@ -12,13 +12,17 @@ const player2El = document.querySelector('.player2-name')
 
 // 사용자 이름 입력 값 함수
 function player1(name){
-  if(name === ''){return 'Player1';}else{
+  if(name === ''){
+    return 'Player1';
+  }else{
     return name;
   }
 }
 
 function player2(name){
-  if(name === ''){return 'Player2';}else{
+  if(name === ''){
+    return 'Player2';
+  }else{
     return name;
   }
 }
